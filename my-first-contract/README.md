@@ -1,13 +1,45 @@
-# Sample Hardhat Project
+# My First Contract — Arbitrum Sepolia
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+A minimal Hardhat project to write, test, deploy, and interact with a smart contract on **Arbitrum Sepolia** (testnet).
 
-Try running some of the following tasks:
+No paid RPC account required — uses the public Arbitrum RPC.
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.ts
+## Quick start
+
+```bash
+npm install
+cp .env.example .env       # add your PRIVATE_KEY
+npm test                   # run the local tests
+npm run deploy             # deploy to Arbitrum Sepolia
+npm run verify -- <addr>   # verify the source on Sourcify (+ Arbiscan if API key set)
+npm run interact           # run scripts/interact.ts against the deployed contract
+npm run console            # open a REPL connected to Arbitrum Sepolia
 ```
+
+## Project layout
+
+```
+contracts/SimpleStorage.sol         # the contract
+test/SimpleStorage.test.ts          # tests
+ignition/modules/SimpleStorage.ts   # deployment module
+scripts/interact.ts                 # example interaction script
+hardhat.config.ts                   # network + verify config
+```
+
+## Environment
+
+Create a `.env` file with:
+
+```env
+PRIVATE_KEY=0x...            # required for deployment
+ARBISCAN_API_KEY=...         # optional, only for Arbiscan verification
+```
+
+Sourcify verification works without any API key — it is enabled by default in `hardhat.config.ts`.
+
+## Useful links
+
+- Faucet: https://faucet.quicknode.com/arbitrum/sepolia
+- Explorer: https://sepolia.arbiscan.io
+- Public RPC: https://sepolia-rollup.arbitrum.io/rpc
+- Chain ID: 421614

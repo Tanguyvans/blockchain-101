@@ -1,21 +1,46 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { SimpleStorage } from "../typechain-types";
-import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
 describe("SimpleStorage", function () {
-  let simpleStorage: SimpleStorage;
-  let owner: SignerWithAddress;
-
-  beforeEach(async function () {
-    [owner] = await ethers.getSigners();
+  async function deploy() {
+    const [owner, alice] = await ethers.getSigners();
     const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
-    simpleStorage = await SimpleStorage.deploy();
+    const contract = await SimpleStorage.deploy();
+    return { contract, owner, alice };
+  }
+
+  it("starts with value 0 and the deployer as owner", async function () {
+    const { contract, owner } = await deploy();
+    expect(await contract.value()).to.equal(0);
+    expect(await contract.owner()).to.equal(owner.address);
   });
 
-  it("Should store and retrieve the value", async function () {
-    const value = 42;
-    await simpleStorage.set(value);
-    expect(await simpleStorage.get()).to.equal(value);
+  it("lets anyone set a value and emits an event", async function () {
+    const { contract, alice } = await deploy();
+    await expect(contract.connect(alice).set(42))
+      .to.emit(contract, "ValueChanged")
+      .withArgs(alice.address, 42);
+
+    expect(await contract.value()).to.equal(42);
+    expect(await contract.lastValueBy(alice.address)).to.equal(42);
+  });
+
+  it("increments by 1", async function () {
+    const { contract } = await deploy();
+    await contract.set(10);
+    await contract.increment();
+    expect(await contract.value()).to.equal(11);
+  });
+
+  it("only lets the owner reset", async function () {
+    const { contract, alice } = await deploy();
+    await contract.set(99);
+
+    await expect(contract.connect(alice).reset()).to.be.revertedWith(
+      "Only the owner can reset"
+    );
+
+    await contract.reset();
+    expect(await contract.value()).to.equal(0);
   });
 });
