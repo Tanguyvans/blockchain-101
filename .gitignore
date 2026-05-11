@@ -9,3 +9,13 @@ venv/
 
 # OS
 .DS_Store
+
+# LaTeX aux files
+slides/*.aux
+slides/*.log
+slides/*.out
+slides/*.nav
+slides/*.snm
+slides/*.toc
+slides/*.vrb
+slides/*.synctex.gz

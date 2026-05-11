@@ -204,9 +204,9 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: {
-      arbitrumSepolia: process.env.ARBISCAN_API_KEY || "",
-    },
+    // Etherscan V2 — one API key for every Etherscan-family explorer.
+    // Get yours at https://etherscan.io/myaccount
+    apiKey: process.env.ETHERSCAN_API_KEY || "",
   },
   sourcify: {
     enabled: true,
@@ -231,7 +231,7 @@ Notice we hardcode the **public Arbitrum Sepolia RPC** — no Alchemy/Infura sig
 
 ```env title=".env"
 PRIVATE_KEY=0x...your_private_key_here...
-ARBISCAN_API_KEY=        # optional, only for Arbiscan verification
+ETHERSCAN_API_KEY=       # optional, only for Arbiscan verification (Etherscan V2 unified key)
 ```
 
 Make sure `.env` is listed in your `.gitignore`.
@@ -277,9 +277,9 @@ Sourcify is enabled in the config. Trigger verification with:
 npx hardhat verify --network arbitrumSepolia <DEPLOYED_ADDRESS>
 ```
 
-### Option B — Arbiscan (needs `ARBISCAN_API_KEY`)
+### Option B — Arbiscan (needs `ETHERSCAN_API_KEY`)
 
-If you set `ARBISCAN_API_KEY` in `.env`, the same command will also push to Arbiscan and your contract will show a green ✓ badge.
+If you set `ETHERSCAN_API_KEY` in `.env`, the same command will also push to Arbiscan and your contract will show a green ✓ badge. The Etherscan V2 API uses a single unified key — get one at [etherscan.io/myaccount](https://etherscan.io/myaccount); the same key works on every Etherscan-family explorer.
 
 ---
 

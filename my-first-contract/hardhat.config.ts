@@ -16,9 +16,9 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: {
-      arbitrumSepolia: process.env.ARBISCAN_API_KEY || "",
-    },
+    // Etherscan V2 unified API key — works on Arbiscan, Basescan, Polygonscan, etc.
+    // Get one at https://etherscan.io/myaccount
+    apiKey: process.env.ETHERSCAN_API_KEY || "",
   },
   sourcify: {
     enabled: true,

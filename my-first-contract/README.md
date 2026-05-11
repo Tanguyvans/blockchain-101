@@ -32,10 +32,10 @@ Create a `.env` file with:
 
 ```env
 PRIVATE_KEY=0x...            # required for deployment
-ARBISCAN_API_KEY=...         # optional, only for Arbiscan verification
+ETHERSCAN_API_KEY=...        # optional, only for Arbiscan verification (Etherscan V2 unified key)
 ```
 
-Sourcify verification works without any API key — it is enabled by default in `hardhat.config.ts`.
+Sourcify verification works without any API key — it is enabled by default in `hardhat.config.ts`. Use **Etherscan V2** (a single key from [etherscan.io/myaccount](https://etherscan.io/myaccount)) for the Arbiscan badge.
 
 ## Useful links
 
