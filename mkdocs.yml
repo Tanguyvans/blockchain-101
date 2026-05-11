@@ -27,7 +27,11 @@ theme:
   features:
     - navigation.instant
     - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
+    - navigation.expand
+    - navigation.indexes
     - content.code.copy
     - content.code.annotate
     - content.action.edit
