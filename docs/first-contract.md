@@ -2,8 +2,8 @@
 
 By the end of this section you will have:
 
-1. A Hardhat project set up locally.
-2. A `SimpleStorage` smart contract written in Solidity.
+1. The workshop project running locally.
+2. Read and understood a `SimpleStorage` contract written in Solidity.
 3. Passing unit tests.
 4. The contract deployed and verified on **Arbitrum Sepolia**.
 
@@ -11,49 +11,44 @@ We use **Arbitrum Sepolia** because faucets are easy to find and the public RPC 
 
 ---
 
-## 1. Create the project
+## 1. Get the project
+
+The Hardhat project is already prepared for you in this repo, in the `my-first-contract/` folder.
+
+Clone the repo and install dependencies:
 
 ```bash
-mkdir my-first-contract
-cd my-first-contract
-npm init -y
+git clone https://github.com/tanguyvans/blockchain-101.git
+cd blockchain-101/my-first-contract
+npm install
 ```
 
-Install Hardhat and its toolbox:
-
-```bash
-npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox typescript ts-node @types/node dotenv
-```
-
-Initialize Hardhat and pick **"Create a TypeScript project"**:
-
-```bash
-npx hardhat init
-```
-
-After init, your folder looks like this:
+What's in there:
 
 ```
 my-first-contract/
 ├── contracts/
-│   └── SimpleStorage.sol         # your Solidity code
+│   └── SimpleStorage.sol         # the Solidity code
 ├── ignition/
 │   └── modules/
 │       └── SimpleStorage.ts      # deployment module
 ├── test/
 │   └── SimpleStorage.test.ts     # unit tests
 ├── scripts/
-│   └── interact.ts               # we will add this in the next section
+│   └── interact.ts               # interaction script (used in next section)
 ├── hardhat.config.ts             # network + verifier config
-├── package.json
-└── .env                          # secrets, NEVER commit
+├── .env.example                  # template for your secrets
+└── package.json
 ```
+
+!!! tip "Why not start from scratch?"
+    Setting up a fresh Hardhat project means typing `npx hardhat init`, picking a template, deleting the boilerplate, and copying files around. We skip the busywork so you can focus on **reading and understanding** real Solidity code, then **deploying it**.
 
 ---
 
-## 2. Write the contract
+## 2. Look at the contract
 
-Replace `contracts/SimpleStorage.sol` with:
+Open `contracts/SimpleStorage.sol`. It is short — read it before running anything:
 
 ```solidity title="contracts/SimpleStorage.sol"
 // SPDX-License-Identifier: MIT
@@ -118,9 +113,9 @@ npx hardhat compile
 
 ---
 
-## 3. Write tests
+## 3. Run the tests
 
-Create `test/SimpleStorage.test.ts`:
+The project ships with a test suite that covers every function. Open `test/SimpleStorage.test.ts` to read it:
 
 ```typescript title="test/SimpleStorage.test.ts"
 import { expect } from "chai";
@@ -181,9 +176,9 @@ Four green checks. These run on a local in-memory chain — no real network, no 
 
 ---
 
-## 4. Configure Arbitrum Sepolia
+## 4. Look at the network config
 
-Replace `hardhat.config.ts` with:
+Open `hardhat.config.ts`. The Arbitrum Sepolia network is already wired in:
 
 ```typescript title="hardhat.config.ts"
 import { HardhatUserConfig } from "hardhat/config";
@@ -229,18 +224,26 @@ Notice we hardcode the **public Arbitrum Sepolia RPC** — no Alchemy/Infura sig
 
 ### Create `.env`
 
+The repo ships an `.env.example` you can copy:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env`:
+
 ```env title=".env"
 PRIVATE_KEY=0x...your_private_key_here...
 ETHERSCAN_API_KEY=       # optional, only for Arbiscan verification (Etherscan V2 unified key)
 ```
 
-Make sure `.env` is listed in your `.gitignore`.
+`.env` is already listed in `.gitignore`, so your secret will not be committed.
 
 ---
 
-## 5. Write the deployment module
+## 5. The deployment module
 
-Create `ignition/modules/SimpleStorage.ts`:
+Open `ignition/modules/SimpleStorage.ts` — it is two lines:
 
 ```typescript title="ignition/modules/SimpleStorage.ts"
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
@@ -250,6 +253,8 @@ export default buildModule("SimpleStorage", (m) => {
   return { simpleStorage };
 });
 ```
+
+This tells Hardhat Ignition what to deploy. For our contract there are no constructor arguments, so a single `m.contract(...)` call is enough.
 
 ---
 
