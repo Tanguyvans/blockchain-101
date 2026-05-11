@@ -16,7 +16,7 @@ We use **Arbitrum Sepolia** (an Ethereum L2 testnet) because:
 - Setting up a Hardhat project with TypeScript.
 - Writing, compiling and testing a Solidity contract.
 - Deploying it to a public testnet and verifying its source code.
-- Calling it from a block explorer UI, a REPL, and a TypeScript script.
+- Calling it from a block explorer UI and from a TypeScript script.
 
 ## What you will build
 
@@ -31,6 +31,6 @@ A `SimpleStorage` contract that:
 
 1. **[Prerequisites](prerequisites.md)** — install the tools (Node.js, MetaMask, test ETH).
 2. **[Your first smart contract](first-contract.md)** — Hardhat, Solidity, tests, deployment.
-3. **[Interacting with your contract](interact.md)** — three different ways to call your contract.
+3. **[Interacting with your contract](interact.md)** — two different ways to call your contract.
 
 Each section is hands-on. Let's start with the [Prerequisites](prerequisites.md).

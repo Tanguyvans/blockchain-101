@@ -157,7 +157,7 @@ It does \emph{not} change state, but it is \textbf{saved on-chain} and anyone ca
 \begin{tikzpicture}
   \node[stepbox] (write)  {{\Large\bfseries Write}\\[0.3em] a smart contract};
   \node[stepbox, right=0.8cm of write]  (deploy) {{\Large\bfseries Deploy}\\[0.3em] on Arbitrum Sepolia};
-  \node[stepbox, right=0.8cm of deploy] (call)   {{\Large\bfseries Call it}\\[0.3em] 3 different ways};
+  \node[stepbox, right=0.8cm of deploy] (call)   {{\Large\bfseries Call it}\\[0.3em] 2 different ways};
   \draw[arrow] (write)  -- (deploy);
   \draw[arrow] (deploy) -- (call);
 \end{tikzpicture}
@@ -167,18 +167,17 @@ It does \emph{not} change state, but it is \textbf{saved on-chain} and anyone ca
 \end{frame}
 
 % =====================================================================
-\begin{frame}{3 ways to call your contract}
-\vspace{0.3em}
+\begin{frame}{2 ways to call your contract}
+\vspace{0.6em}
 \centering
 
 \begin{tikzpicture}
-  \node[stepbox, fill=blue!10]                            (w1) {{\large\bfseries 1. Explorer}\\[0.3em] click buttons\\ on Arbiscan};
-  \node[stepbox, fill=blue!15, right=0.6cm of w1]         (w2) {{\large\bfseries 2. Console}\\[0.3em] REPL on the\\ live chain};
-  \node[stepbox, fill=blue!20, right=0.6cm of w2]         (w3) {{\large\bfseries 3. Script}\\[0.3em] TypeScript,\\ the way a dApp does};
+  \node[stepbox, fill=blue!10]                       (w1) {{\large\bfseries 1. Explorer}\\[0.3em] click buttons\\ on Arbiscan};
+  \node[stepbox, fill=blue!20, right=0.8cm of w1]    (w2) {{\large\bfseries 2. Script}\\[0.3em] TypeScript,\\ the way a dApp does};
 \end{tikzpicture}
 
 \vspace{1.4em}
-{\large Same contract. Three angles to understand it.}\\[0.5em]
+{\large Same contract. Two angles to understand it.}\\[0.5em]
 \small\itshape Read = free.\quad Write = signed transaction + gas.
 
 \end{frame}

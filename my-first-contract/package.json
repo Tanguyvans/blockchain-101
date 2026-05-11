@@ -8,8 +8,7 @@
     "test": "hardhat test",
     "deploy": "hardhat ignition deploy ignition/modules/SimpleStorage.ts --network arbitrumSepolia",
     "verify": "hardhat verify --network arbitrumSepolia",
-    "interact": "hardhat run scripts/interact.ts --network arbitrumSepolia",
-    "console": "hardhat console --network arbitrumSepolia"
+    "interact": "hardhat run scripts/interact.ts --network arbitrumSepolia"
   },
   "license": "ISC",
   "devDependencies": {

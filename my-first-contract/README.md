@@ -11,9 +11,8 @@ npm install
 cp .env.example .env       # add your PRIVATE_KEY
 npm test                   # run the local tests
 npm run deploy             # deploy to Arbitrum Sepolia
-npm run verify -- <addr>   # verify the source on Sourcify (+ Arbiscan if API key set)
+npm run verify -- <addr>   # verify the source on Sourcify (no API key needed)
 npm run interact           # run scripts/interact.ts against the deployed contract
-npm run console            # open a REPL connected to Arbitrum Sepolia
 ```
 
 ## Project layout
@@ -40,7 +39,7 @@ Verification goes through **Sourcify** — no API key needed. Arbiscan automatic
 
 ## Useful links
 
-- Faucet: https://faucet.quicknode.com/arbitrum/sepolia
-- Explorer: https://sepolia.arbiscan.io
-- Public RPC: https://sepolia-rollup.arbitrum.io/rpc
+- Faucet: <https://faucet.quicknode.com/arbitrum/sepolia>
+- Explorer: <https://sepolia.arbiscan.io>
+- Public RPC: <https://sepolia-rollup.arbitrum.io/rpc>
 - Chain ID: 421614
