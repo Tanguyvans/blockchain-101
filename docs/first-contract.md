@@ -3,8 +3,8 @@
 By the end of this section you will have:
 
 1. The workshop project running locally.
-2. Read and understood a `SimpleStorage` contract written in Solidity.
-3. Passing unit tests.
+2. Written your own `SimpleStorage` contract in Solidity.
+3. Passing unit tests for it.
 4. The contract deployed and verified on **Arbitrum Sepolia**.
 
 We use **Arbitrum Sepolia** because faucets are easy to find and the public RPC works out of the box — no Alchemy / Infura account required.
@@ -25,30 +25,28 @@ npm install
 
 What's in there:
 
-```
+```text
 my-first-contract/
-├── contracts/
-│   └── SimpleStorage.sol         # the Solidity code
+├── contracts/                    # ← you will write the Solidity here
+├── test/                         # ← you will write the tests here
 ├── ignition/
 │   └── modules/
-│       └── SimpleStorage.ts      # deployment module
-├── test/
-│   └── SimpleStorage.test.ts     # unit tests
+│       └── SimpleStorage.ts      # deployment module (already done)
 ├── scripts/
 │   └── interact.ts               # interaction script (used in next section)
-├── hardhat.config.ts             # network + verifier config
+├── hardhat.config.ts             # network + verifier config (already done)
 ├── .env.example                  # template for your secrets
 └── package.json
 ```
 
-!!! tip "Why not start from scratch?"
-    Setting up a fresh Hardhat project means typing `npx hardhat init`, picking a template, deleting the boilerplate, and copying files around. We skip the busywork so you can focus on **reading and understanding** real Solidity code, then **deploying it**.
+!!! tip "Why not start from `npx hardhat init`?"
+    A fresh init creates a Lock-contract demo and a pile of boilerplate you would then have to delete. We pre-configured the Hardhat scaffolding so you can focus on **writing** the contract and **deploying** it — not on plumbing.
 
 ---
 
-## 2. Look at the contract
+## 2. Write the contract
 
-Open `contracts/SimpleStorage.sol`. It is short — read it before running anything:
+Create `contracts/SimpleStorage.sol`:
 
 ```solidity title="contracts/SimpleStorage.sol"
 // SPDX-License-Identifier: MIT
@@ -113,9 +111,9 @@ npx hardhat compile
 
 ---
 
-## 3. Run the tests
+## 3. Write the tests
 
-The project ships with a test suite that covers every function. Open `test/SimpleStorage.test.ts` to read it:
+Create `test/SimpleStorage.test.ts`:
 
 ```typescript title="test/SimpleStorage.test.ts"
 import { expect } from "chai";

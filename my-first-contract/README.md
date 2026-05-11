@@ -18,13 +18,15 @@ npm run console            # open a REPL connected to Arbitrum Sepolia
 
 ## Project layout
 
+```text
+contracts/                          # you write SimpleStorage.sol here
+test/                               # you write SimpleStorage.test.ts here
+ignition/modules/SimpleStorage.ts   # deployment module (pre-filled)
+scripts/interact.ts                 # interaction script (pre-filled)
+hardhat.config.ts                   # network + verify config (pre-filled)
 ```
-contracts/SimpleStorage.sol         # the contract
-test/SimpleStorage.test.ts          # tests
-ignition/modules/SimpleStorage.ts   # deployment module
-scripts/interact.ts                 # example interaction script
-hardhat.config.ts                   # network + verify config
-```
+
+Follow the [workshop docs](../docs/first-contract.md) for the Solidity source and the test suite.
 
 ## Environment
 
