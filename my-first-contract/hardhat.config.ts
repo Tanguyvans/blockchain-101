@@ -19,6 +19,18 @@ const config: HardhatUserConfig = {
     // Etherscan V2 unified API key — works on Arbiscan, Basescan, Polygonscan, etc.
     // Get one at https://etherscan.io/myaccount
     apiKey: process.env.ETHERSCAN_API_KEY || "",
+    // Force the V2 endpoint. hardhat-verify 2.x still defaults to V1 URLs
+    // for arbitrumSepolia, which Etherscan has now deprecated.
+    customChains: [
+      {
+        network: "arbitrumSepolia",
+        chainId: 421614,
+        urls: {
+          apiURL: "https://api.etherscan.io/v2/api?chainid=421614",
+          browserURL: "https://sepolia.arbiscan.io",
+        },
+      },
+    ],
   },
   sourcify: {
     enabled: true,
