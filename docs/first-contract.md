@@ -196,25 +196,15 @@ const config: HardhatUserConfig = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
   },
-  etherscan: {
-    // Etherscan V2 — one API key for every Etherscan-family explorer.
-    // Get yours at https://etherscan.io/myaccount
-    apiKey: process.env.ETHERSCAN_API_KEY || "",
-    // Force the V2 endpoint (hardhat-verify 2.x still defaults to V1 for
-    // arbitrumSepolia, which Etherscan has deprecated).
-    customChains: [
-      {
-        network: "arbitrumSepolia",
-        chainId: 421614,
-        urls: {
-          apiURL: "https://api.etherscan.io/v2/api?chainid=421614",
-          browserURL: "https://sepolia.arbiscan.io",
-        },
-      },
-    ],
-  },
+  // We verify via Sourcify. No API key needed.
+  // Arbiscan automatically displays Sourcify-verified contracts.
   sourcify: {
     enabled: true,
+  },
+  etherscan: {
+    // hardhat-verify 2.x for Hardhat 2 still hits the deprecated V1
+    // endpoint for arbitrumSepolia — disable that path.
+    enabled: false,
   },
 };
 
@@ -244,7 +234,6 @@ Then edit `.env`:
 
 ```env title=".env"
 PRIVATE_KEY=0x...your_private_key_here...
-ETHERSCAN_API_KEY=       # optional, only for Arbiscan verification (Etherscan V2 unified key)
 ```
 
 `.env` is already listed in `.gitignore`, so your secret will not be committed.
@@ -284,17 +273,23 @@ Hardhat prints the deployed contract address — **copy it**, you will need it i
 
 Verification publishes your Solidity source so anyone can read and call your contract from the explorer.
 
-### Option A — Sourcify (no API key)
-
-Sourcify is enabled in the config. Trigger verification with:
+We use **Sourcify**, a free verifier that does **not require any API key**. Trigger it with:
 
 ```bash
 npx hardhat verify --network arbitrumSepolia <DEPLOYED_ADDRESS>
 ```
 
-### Option B — Arbiscan (needs `ETHERSCAN_API_KEY`)
+You should see:
 
-If you set `ETHERSCAN_API_KEY` in `.env`, the same command will also push to Arbiscan and your contract will show a green ✓ badge. The Etherscan V2 API uses a single unified key — get one at [etherscan.io/myaccount](https://etherscan.io/myaccount); the same key works on every Etherscan-family explorer.
+```text
+Successfully verified contract SimpleStorage on Sourcify.
+https://repo.sourcify.dev/contracts/full_match/421614/<DEPLOYED_ADDRESS>/
+```
+
+Open your contract on [sepolia.arbiscan.io](https://sepolia.arbiscan.io). Arbiscan automatically picks up Sourcify-verified contracts: you will see your source under the **Code** tab, and the **Read Contract** / **Write Contract** tabs are now populated — that is what we use in the next section.
+
+!!! info "Why not Arbiscan directly?"
+    The current Hardhat 2 + `hardhat-verify@2.x` combo still calls the deprecated Etherscan V1 endpoint for Arbitrum Sepolia, which Etherscan no longer accepts. Sourcify gives us the same result (visible verified source on Arbiscan) with zero setup. The full Arbiscan path will work again once we migrate to Hardhat 3 + `hardhat-verify@3.x`.
 
 ---
 

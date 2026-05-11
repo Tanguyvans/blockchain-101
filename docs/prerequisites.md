@@ -53,14 +53,6 @@ Try any of these (no signup needed for most):
 
 Paste your MetaMask address, request the funds, then check the balance in MetaMask once the network is selected.
 
-## Optional — Etherscan API key
+## That's it — no third-party accounts needed
 
-Only needed if you want your contract source code to display the native green ✓ badge on [Arbiscan](https://sepolia.arbiscan.io). We will use the free **Sourcify** verifier as the default, so this step is optional.
-
-Since 2024, Etherscan has unified its API: **a single key from [etherscan.io](https://etherscan.io) works on every Etherscan-family explorer** — Arbiscan, Basescan, Polygonscan, BscScan, etc. No need to create accounts on each one.
-
-If you want the Arbiscan badge:
-
-1. Create a free account on [etherscan.io](https://etherscan.io).
-2. Open **[etherscan.io/myaccount](https://etherscan.io/myaccount)** → **API Keys** → **Add**.
-3. Save the key, you will use it as `ETHERSCAN_API_KEY` later.
+We verify contracts through **Sourcify**, which requires no API key. The verified source code is then displayed on Arbiscan automatically, so you do not need an Etherscan / Arbiscan account for this workshop.
